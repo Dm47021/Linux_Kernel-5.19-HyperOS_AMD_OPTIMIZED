@@ -152,7 +152,6 @@ x509.genkey
 /allyes.config
 
 # Kconfig savedefconfig output
-/defconfig
 
 # Kdevelop4
 *.kdev4
