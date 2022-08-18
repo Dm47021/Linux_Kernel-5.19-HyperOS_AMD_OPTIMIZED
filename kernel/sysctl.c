@@ -85,6 +85,9 @@
 #if defined(CONFIG_SYSCTL)
 
 /* Constants used for minimum and  maximum */
+static int ten_thousand = 10000;
+extern int hrtimer_granularity_us;
+extern int hrtimeout_min_us;
 
 #ifdef CONFIG_SCHED_ALT
 extern int sched_yield_type;
@@ -2314,6 +2317,24 @@ static struct ctl_table vm_table[] = {
 		.extra2		= SYSCTL_ONE_HUNDRED,
 	},
 #endif
+	{
+		.procname	= "hrtimer_granularity_us",
+		.data		= &hrtimer_granularity_us,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= &proc_dointvec_minmax,
+		.extra1		= SYSCTL_ONE,
+		.extra2		= &ten_thousand,
+	},
+	{
+		.procname	= "hrtimeout_min_us",
+		.data		= &hrtimeout_min_us,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= &proc_dointvec_minmax,
+		.extra1		= SYSCTL_ONE,
+		.extra2		= &ten_thousand,
+	},
 #ifdef CONFIG_SMP
 	{
 		.procname	= "stat_interval",
